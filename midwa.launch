@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- spawn robots -->
+    
+    
+    <include file="$(find ecn_ros2015)/spawn.launch">
+        <arg name="model" value="bb8.xacro"/>
+	<arg name="pose" value="5 0 1.57"/>
+	<arg name="prefix" value="robot1"/>
+    </include>
+    
+    <include file="$(find ecn_ros2015)/spawn.launch">
+        <arg name="model" value="r2d2.urdf"/>
+	<arg name="pose" value="-4 -2 .1"/>
+        <arg name="prefix" value="robot2"/>
+	
+    </include>
+    
+    <include file="$(find ecn_ros2015)/spawn.launch">
+        <arg name="model" value="r2d2_red.urdf"/>
+	<arg name="pose" value="-1 3 -.3"/>
+        <arg name="prefix" value="robot3"/>
+    </include>
+
+    
+<!-- Rviz node -->
+    <param name="use_gui" value="True"/>
+    <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find ecn_ros2015)/config.rviz" />
+    
+    <!-- Simulator -->
+    <node name="simulator" pkg="ecn_ros2015" type="sim"/>
+</launch>

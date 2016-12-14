@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="prefix" default="robot0"/>
+  <arg name="model" default="r2d2.urdf"/>
+  <arg name="pose" default="0 0 0"/>
+  
+  <group ns="$(arg prefix)">
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find ecn_ros2015)/urdf/$(arg model)"/>
+    <param name="pose" value="$(arg pose)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+      <param name="tf_prefix" value="$(arg prefix)" />
+    </node>
+  </group>
+</launch>
