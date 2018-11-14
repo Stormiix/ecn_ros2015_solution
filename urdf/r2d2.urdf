@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
-<robot name="r2d2">
+<robot name="r2d2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+<xacro:arg name="prefix" default="robot2"/>
+<xacro:arg name="rgb" default="0 0 0"/>
 
-<material name="blue">
-    <color rgba="0 0 .8 1"/>
-  </material>
+<material name="color">
+    <color rgba="$(arg rgb) 1"/>
+</material>
+  
   <material name="black">
     <color rgba="0 0 0 1"/>
   </material>
@@ -11,34 +15,34 @@
     <color rgba="1 1 1 1"/>
   </material>
 
-  <link name="base_link">
+  <link name="$(arg prefix)/base_link">
     <visual>
       <geometry>
         <cylinder length="0.6" radius="0.2"/>
       </geometry>
-      <material name="blue"/>
+      <material name="color"/>
     </visual>
   </link>
   
-  <link name="ground">
+  <link name="$(arg prefix)/ground">
   </link>
   
   <joint name="ground" type="fixed">
-      <child link="base_link"/>
-      <parent link="ground"/>
+      <child link="$(arg prefix)/base_link"/>
+      <parent link="$(arg prefix)/ground"/>
     <origin xyz="0 0 .47"/>
    </joint>
    
-     <link name="target">
+     <link name="$(arg prefix)/target">
   </link>
   
   <joint name="bait" type="fixed">
-      <child link="target"/>
-      <parent link="ground"/>
+      <child link="$(arg prefix)/target"/>
+      <parent link="$(arg prefix)/ground"/>
     <origin xyz="-.5 0 0"/>
    </joint>
 
-  <link name="right_leg">
+  <link name="$(arg prefix)/right_leg">
     <visual>
       <geometry>
         <box size="0.6 .1 .2"/>
@@ -49,12 +53,12 @@
   </link>
 
   <joint name="base_to_right_leg" type="fixed">
-    <parent link="base_link"/>
-    <child link="right_leg"/>
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/right_leg"/>
     <origin xyz="0 -0.22 .25"/>
   </joint>
 
-  <link name="right_base">
+  <link name="$(arg prefix)/right_base">
     <visual>
       <geometry>
         <box size="0.4 .1 .1"/>
@@ -64,12 +68,12 @@
   </link>
 
   <joint name="right_base_joint" type="fixed">
-    <parent link="right_leg"/>
-    <child link="right_base"/>
+    <parent link="$(arg prefix)/right_leg"/>
+    <child link="$(arg prefix)/right_base"/>
     <origin xyz="0 0 -0.6"/>
   </joint>
 
-  <link name="right_front_wheel">
+  <link name="$(arg prefix)/right_front_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <geometry>
@@ -81,12 +85,12 @@
   </link>
   <joint name="right_front_wheel_joint" type="fixed">
     <axis rpy="0 0 0" xyz="0 1 0"/>
-    <parent link="right_base"/>
-    <child link="right_front_wheel"/>
+    <parent link="$(arg prefix)/right_base"/>
+    <child link="$(arg prefix)/right_front_wheel"/>
     <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
   </joint>
 
-  <link name="right_back_wheel">
+  <link name="$(arg prefix)/right_back_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <geometry>
@@ -97,12 +101,12 @@
   </link>
   <joint name="right_back_wheel_joint" type="fixed">
     <axis rpy="0 0 0" xyz="0 1 0"/>
-    <parent link="right_base"/>
-    <child link="right_back_wheel"/>
+    <parent link="$(arg prefix)/right_base"/>
+    <child link="$(arg prefix)/right_back_wheel"/>
     <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
   </joint>
 
-  <link name="left_leg">
+  <link name="$(arg prefix)/left_leg">
     <visual>
       <geometry>
         <box size="0.6 .1 .2"/>
@@ -113,12 +117,12 @@
   </link>
 
   <joint name="base_to_left_leg" type="fixed">
-    <parent link="base_link"/>
-    <child link="left_leg"/>
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/left_leg"/>
     <origin xyz="0 0.22 .25"/>
   </joint>
 
-  <link name="left_base">
+  <link name="$(arg prefix)/left_base">
     <visual>
       <geometry>
         <box size="0.4 .1 .1"/>
@@ -128,12 +132,12 @@
   </link>
 
   <joint name="left_base_joint" type="fixed">
-    <parent link="left_leg"/>
-    <child link="left_base"/>
+    <parent link="$(arg prefix)/left_leg"/>
+    <child link="$(arg prefix)/left_base"/>
     <origin xyz="0 0 -0.6"/>
   </joint>
 
-  <link name="left_front_wheel">
+  <link name="$(arg prefix)/left_front_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <geometry>
@@ -143,12 +147,12 @@
     </visual>
   </link>
   <joint name="left_front_wheel_joint" type="fixed">
-    <parent link="left_base"/>
-    <child link="left_front_wheel"/>
+    <parent link="$(arg prefix)/left_base"/>
+    <child link="$(arg prefix)/left_front_wheel"/>
     <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
   </joint>
 
-  <link name="left_back_wheel">
+  <link name="$(arg prefix)/left_back_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
       <geometry>
@@ -159,12 +163,12 @@
   </link>
   <joint name="left_back_wheel_joint" type="fixed">
     <axis rpy="0 0 0" xyz="0 1 0"/>
-    <parent link="left_base"/>
-    <child link="left_back_wheel"/>
+    <parent link="$(arg prefix)/left_base"/>
+    <child link="$(arg prefix)/left_back_wheel"/>
     <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
   </joint>
 
-  <link name="head">
+  <link name="$(arg prefix)/head">
     <visual>
       <geometry>
         <sphere radius="0.2"/>
@@ -173,23 +177,23 @@
     </visual>
   </link>
   <joint name="head_swivel" type="fixed">
-    <parent link="base_link"/>
-    <child link="head"/>
+    <parent link="$(arg prefix)/base_link"/>
+    <child link="$(arg prefix)/head"/>
     <origin xyz="0 0 0.3"/>
   </joint>
 
-  <link name="box">
+  <link name="$(arg prefix)/box">
     <visual>
       <geometry>
         <box size=".08 .08 .08"/>
       </geometry>
-      <material name="blue"/>
+      <material name="color"/>
     </visual>
   </link>
 
   <joint name="tobox" type="fixed">
-    <parent link="head"/>
-    <child link="box"/>
+    <parent link="$(arg prefix)/head"/>
+    <child link="$(arg prefix)/box"/>
     <origin xyz="0.1814 0 0.1414"/>
   </joint>
 </robot>
