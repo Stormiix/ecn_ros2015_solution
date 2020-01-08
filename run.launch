@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="ecn_ros2015" type="midwa_node" name="robot2" output="screen">
+        <remap from="/current" to="/robot2/pose"/>
+        <remap from="/target" to="/robot1/pose"/>
+        <remap from="/cmd" to="/robot2/cmd"/>
+    </node>
+
+    <node pkg="ecn_ros2015" type="midwa_node" name="robot3" output="screen">
+        <remap from="/current" to="/robot3/pose"/>
+        <remap from="/target" to="/robot2/pose"/>
+        <remap from="/cmd" to="/robot3/cmd"/>
+    </node>
+</launch>

@@ -18,7 +18,7 @@ include_directories(
 )
 
 ## Declare a C++ executable
-#add_executable(midwa_node midwa_node.cpp)
+add_executable(midwa_node src/node.cpp)
 
 ## Specify libraries to link a library or executable target against
-#target_link_libraries(midwa_node   ${catkin_LIBRARIES} )
+target_link_libraries(midwa_node   ${catkin_LIBRARIES} )
